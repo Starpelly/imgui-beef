@@ -261,7 +261,7 @@ jobs:
           echo "::set-output name=commit-id::$COMMIT_ID"
       
       - name: Create tag
-        uses: simpleactions/create-tag@v1.0.0
+        uses: mtharvey/create-tag@v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

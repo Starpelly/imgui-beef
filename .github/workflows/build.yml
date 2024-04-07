@@ -252,7 +252,7 @@ jobs:
           git checkout Build
           git merge Bindings
           git checkout master
-          git pull
+          git pull --rebase
           git merge --squash Build
           git commit -m "Generation"
           git push origin master

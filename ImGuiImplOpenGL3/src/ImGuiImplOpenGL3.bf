@@ -14,17 +14,9 @@ namespace ImGui
         private static extern bool CreateDeviceObjectsImpl();
         public static bool CreateDeviceObjects() => CreateDeviceObjectsImpl();
         
-        [LinkName("ImGui_ImplOpenGL3_CreateFontsTexture")]
-        private static extern bool CreateFontsTextureImpl();
-        public static bool CreateFontsTexture() => CreateFontsTextureImpl();
-        
         [LinkName("ImGui_ImplOpenGL3_DestroyDeviceObjects")]
         private static extern void DestroyDeviceObjectsImpl();
         public static void DestroyDeviceObjects() => DestroyDeviceObjectsImpl();
-        
-        [LinkName("ImGui_ImplOpenGL3_DestroyFontsTexture")]
-        private static extern void DestroyFontsTextureImpl();
-        public static void DestroyFontsTexture() => DestroyFontsTextureImpl();
         
         [LinkName("ImGui_ImplOpenGL3_Init")]
         private static extern bool InitImpl(char* glsl_version);
@@ -45,5 +37,9 @@ namespace ImGui
         [LinkName("ImGui_ImplOpenGL3_Shutdown")]
         private static extern void ShutdownImpl();
         public static void Shutdown() => ShutdownImpl();
+        
+        [LinkName("ImGui_ImplOpenGL3_UpdateTexture")]
+        private static extern void UpdateTextureImpl(TextureData* tex);
+        public static void UpdateTexture(TextureData* tex) => UpdateTextureImpl(tex);
     }
 }

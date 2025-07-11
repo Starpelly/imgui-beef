@@ -19,6 +19,14 @@ namespace ImGui
         private static extern void CursorPosCallbackImpl(GLFWwindow* window, double x, double y);
         public static void CursorPosCallback(GLFWwindow* window, double x, double y) => CursorPosCallbackImpl(window, x, y);
         
+        [LinkName("ImGui_ImplGlfw_GetContentScaleForMonitor")]
+        private static extern float GetContentScaleForMonitorImpl(GLFWmonitor* monitor);
+        public static float GetContentScaleForMonitor(GLFWmonitor* monitor) => GetContentScaleForMonitorImpl(monitor);
+        
+        [LinkName("ImGui_ImplGlfw_GetContentScaleForWindow")]
+        private static extern float GetContentScaleForWindowImpl(GLFWwindow* window);
+        public static float GetContentScaleForWindow(GLFWwindow* window) => GetContentScaleForWindowImpl(window);
+        
         [LinkName("ImGui_ImplGlfw_InitForOpenGL")]
         private static extern bool InitForOpenGLImpl(GLFWwindow* window, bool install_callbacks);
         public static bool InitForOpenGL(GLFWwindow* window, bool install_callbacks) => InitForOpenGLImpl(window, install_callbacks);
@@ -66,6 +74,10 @@ namespace ImGui
         [LinkName("ImGui_ImplGlfw_Shutdown")]
         private static extern void ShutdownImpl();
         public static void Shutdown() => ShutdownImpl();
+        
+        [LinkName("ImGui_ImplGlfw_Sleep")]
+        private static extern void SleepImpl(int32 milliseconds);
+        public static void Sleep(int32 milliseconds) => SleepImpl(milliseconds);
         
         [LinkName("ImGui_ImplGlfw_WindowFocusCallback")]
         private static extern void WindowFocusCallbackImpl(GLFWwindow* window, int32 focused);

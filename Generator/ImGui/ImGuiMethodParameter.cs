@@ -105,7 +105,7 @@ namespace ImGuiBeefGenerator.ImGui
                 else
                 {
                     var argStrSplit = argStr.Split(' ');
-                    if (argStr.Length >= 2)
+                    if (argStrSplit.Length >= 2)
                     {
                         var type = argStrSplit[0];
                         var name = argStrSplit[1];

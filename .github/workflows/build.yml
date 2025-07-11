@@ -73,6 +73,11 @@ jobs:
           cd cimgui
           git checkout tags/${{ needs.compare-tags.outputs.new-tag }}
           git submodule update --init
+
+      - name: Run cimgui generator
+        run: |
+          cd cimgui/generator
+          ./generator.bat
       
       - name: Prepare cimgui
         run: |

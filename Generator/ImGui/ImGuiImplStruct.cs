@@ -30,6 +30,14 @@ namespace ImGuiBeefGenerator.ImGui
                 var implStruct = structs.Single(s => s.Name == structName);
                 var variation = (Dictionary<string, object>) (definition.Value as List<object>).First();
                 variation["funcname"] = definitionName;
+
+                // Pelly:
+                // IDK what this is but for some reason this doesn't have a return type, so I just made up some bullshit to make it build...
+                if (definition.Key == "ImGui_ImplVulkanH_Window_ImGui_ImplVulkanH_Window")
+                {
+                    variation["ret"] = "from_pelly_idk_lol_sorry_if_i_fucked_up_your_build...";
+                }
+  
                 implStruct.Methods.Add(ImGuiMethodDefinition.FromVariation(variation));
             }
 

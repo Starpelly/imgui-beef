@@ -11,7 +11,7 @@ env:
 
 jobs:
   compare-tags:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     outputs:
       is-new-version: ${{ steps.compare.outputs.not_equal }}
       new-tag: ${{ steps.get_latest_tag.outputs.cimgui_tag }}

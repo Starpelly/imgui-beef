@@ -255,6 +255,9 @@ jobs:
           dotnet run
           git add ..
           git commit -m "Generate Bindings"
+
+      - name: Cleanup libssl installer
+        run: rm libssl1.1_1.1.0g-2ubuntu4_amd64.deb
           
       - name: Push generated files
         id: merge-all

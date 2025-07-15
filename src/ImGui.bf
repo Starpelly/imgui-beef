@@ -1,10 +1,10 @@
 // -- GENERATION INFORMATION --
-// Date: 07/11/2025 03:36:52
+// Date: 07/15/2025 06:04:29
 // Constructors: 113
 // Destructors: 90
 // Enums: 85
-// Global methods: 1013
-// Instance methods: 376
+// Global methods: 1014
+// Instance methods: 377
 // Structs: 133
 // Typedefs: 33
 
@@ -32,8 +32,8 @@ namespace ImGui
 
 	public static class ImGui
     {
-		public static char8* VERSION = "1.92.0";
-		public static int VERSION_NUM = 192000;
+		public static char8* VERSION = "1.92.1";
+		public static int VERSION_NUM = 192100;
 		public static bool CHECKVERSION()
 		{
 			bool result = DebugCheckVersionAndDataLayout(VERSION, sizeof(IO), sizeof(Style), sizeof(Vec2), sizeof(Vec4), sizeof(DrawVert), sizeof(DrawIdx));
@@ -2442,6 +2442,10 @@ namespace ImGui
             private static extern void RemoveFontImpl(Self* self, Font* font);
             public void RemoveFont(Font* font) mut=> RemoveFontImpl(&this, font);
             
+            [LinkName("ImFontAtlas_SetFontLoader")]
+            private static extern void SetFontLoaderImpl(Self* self, FontLoader* font_loader);
+            public void SetFontLoader(FontLoader* font_loader) mut=> SetFontLoaderImpl(&this, font_loader);
+            
         }
         
         [CRepr]
@@ -2580,9 +2584,9 @@ namespace ImGui
             public bool MergeMode;
             public bool PixelSnapH;
             public bool PixelSnapV;
-            public S8 FontNo;
             public S8 OversampleH;
             public S8 OversampleV;
+            public Wchar EllipsisChar;
             public float SizePixels;
             public Wchar* GlyphRanges;
             public Wchar* GlyphExcludeRanges;
@@ -2590,10 +2594,10 @@ namespace ImGui
             public float GlyphMinAdvanceX;
             public float GlyphMaxAdvanceX;
             public float GlyphExtraAdvanceX;
+            public U32 FontNo;
             public uint32 FontLoaderFlags;
             public float RasterizerMultiply;
             public float RasterizerDensity;
-            public Wchar EllipsisChar;
             public FontFlags Flags;
             public Font* DstFont;
             public FontLoader* FontLoader;
@@ -2688,7 +2692,7 @@ namespace ImGui
             public function bool(FontAtlas* atlas, FontConfig* src, Wchar codepoint) FontSrcContainsGlyph;
             public function bool(FontAtlas* atlas, FontConfig* src, FontBaked* baked, void* loader_data_for_baked_src) FontBakedInit;
             public function void(FontAtlas* atlas, FontConfig* src, FontBaked* baked, void* loader_data_for_baked_src) FontBakedDestroy;
-            public function bool(FontAtlas* atlas, FontConfig* src, FontBaked* baked, void* loader_data_for_baked_src, Wchar codepoint, FontGlyph* out_glyph) FontBakedLoadGlyph;
+            public function bool(FontAtlas* atlas, FontConfig* src, FontBaked* baked, void* loader_data_for_baked_src, Wchar codepoint, FontGlyph* out_glyph, float* out_advance_x) FontBakedLoadGlyph;
             public size FontBakedSrcLoaderDataSize;
         
             [LinkName("ImFontLoader_ImFontLoader")]
@@ -2818,7 +2822,7 @@ namespace ImGui
             public float WheelingWindowReleaseTimer;
             public Vec2 WheelingWindowWheelRemainder;
             public Vec2 WheelingAxisAvg;
-            public ID DebugDrawIdConflicts;
+            public ID DebugDrawIdConflictsId;
             public ID DebugHookIdInfo;
             public ID HoveredId;
             public ID HoveredIdPreviousFrame;
@@ -8664,6 +8668,10 @@ namespace ImGui
         #else
         public static FontGlyph* ImFontAtlasBakedAddFontGlyph(FontAtlas* atlas, FontBaked* baked, FontConfig* src, FontGlyph* in_glyph) => ImFontAtlasBakedAddFontGlyphImpl(atlas, baked, src, in_glyph);
         #endif
+        
+        [LinkName("igImFontAtlasBakedAddFontGlyphAdvancedX")]
+        private static extern void ImFontAtlasBakedAddFontGlyphAdvancedXImpl(FontAtlas* atlas, FontBaked* baked, FontConfig* src, Wchar codepoint, float advance_x);
+        public static void ImFontAtlasBakedAddFontGlyphAdvancedX(FontAtlas* atlas, FontBaked* baked, FontConfig* src, Wchar codepoint, float advance_x) => ImFontAtlasBakedAddFontGlyphAdvancedXImpl(atlas, baked, src, codepoint, advance_x);
         
         [LinkName("igImFontAtlasBakedDiscard")]
         private static extern void ImFontAtlasBakedDiscardImpl(FontAtlas* atlas, Font* font, FontBaked* baked);

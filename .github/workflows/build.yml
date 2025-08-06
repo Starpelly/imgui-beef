@@ -13,7 +13,7 @@ jobs:
   compare-tags:
     runs-on: ubuntu-latest
     outputs:
-      is-new-version: ${{ steps.compare.outputs.not_equal }}
+      is-new-version: ${{ steps.force_true.outputs.not_equal }}
       new-tag: ${{ steps.get_latest_tag.outputs.cimgui_tag }}
 
     steps:
@@ -59,6 +59,10 @@ jobs:
           NOT_EQ=${{ steps.get_latest_tag.outputs.cimgui_tag != steps.get_latest_tag.outputs.imgui_beef_tag }}
           echo "::set-output name=not_equal::$NOT_EQ"
           # echo "{not_equal}={$NOT_EQ}" >> $GITHUB_OUTPUT
+          
+      - name: Force tag comparison to always true
+        id: force_true
+        run: echo "::set-output name=not_equal::true"
 
   windows:
     runs-on: windows-latest

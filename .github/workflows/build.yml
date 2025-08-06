@@ -94,6 +94,7 @@ jobs:
           cd .\cimgui\
           cmake .
           cmake -DIMGUI_STATIC=yes
+          cmake -DCMAKE_MSVC_RUNTIME_LIBRARY="MultiThreaded$<$<CONFIG:Debug>:Debug>" -DIMGUI_STATIC=yes .
           cmake --build . --target ALL_BUILD --config Debug -- /nologo /maxcpucount
           cmake --build . --target ALL_BUILD --config Release -- /nologo /maxcpucount
       

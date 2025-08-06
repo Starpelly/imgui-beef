@@ -1,5 +1,5 @@
 // -- GENERATION INFORMATION --
-// Date: 08/06/2025 01:32:48
+// Date: 8/5/2025 11:34:27 PM
 // Constructors: 113
 // Destructors: 90
 // Enums: 85
@@ -1823,7 +1823,7 @@ namespace ImGui
             public Vec2 DisplaySize;
             public Vec2 FramebufferScale;
             public Viewport* OwnerViewport;
-            public Vector<TextureData**> Textures;
+            public Vector<TextureData*>* Textures;
         
             [LinkName("ImDrawData_ImDrawData")]
             private static extern DrawData* CtorImpl();
@@ -1853,7 +1853,7 @@ namespace ImGui
         [CRepr]
         public struct DrawDataBuilder
         {
-            public Vector<DrawList**>[2] Layers;
+            public Vector<DrawList*>*[2] Layers;
             public Vector<DrawList*> LayerData1;
         
             [LinkName("ImDrawDataBuilder_ImDrawDataBuilder")]
@@ -3575,6 +3575,7 @@ namespace ImGui
             {
                 this = *CtorImpl();
             }
+            
             [CRepr, Union]
             public struct InputEventUnion0
             {
@@ -4659,6 +4660,7 @@ namespace ImGui
             {
                 this = *CtorImpl(_key, _val);
             }
+            
             [CRepr, Union]
             public struct StoragePairUnion0
             {
@@ -4779,6 +4781,7 @@ namespace ImGui
             {
                 this = *CtorImpl(idx, v);
             }
+            
             [CRepr, Union]
             public struct StyleModUnion0
             {
@@ -6643,8 +6646,8 @@ namespace ImGui
         public static ID AddContextHook(Context* context, ContextHook* hook) => AddContextHookImpl(context, hook);
         
         [LinkName("igAddDrawListToDrawDataEx")]
-        private static extern void AddDrawListToDrawDataExImpl(DrawData* draw_data, Vector<DrawList**> out_list, DrawList* draw_list);
-        public static void AddDrawListToDrawDataEx(DrawData* draw_data, Vector<DrawList**> out_list, DrawList* draw_list) => AddDrawListToDrawDataExImpl(draw_data, out_list, draw_list);
+        private static extern void AddDrawListToDrawDataExImpl(DrawData* draw_data, Vector<DrawList*>* out_list, DrawList* draw_list);
+        public static void AddDrawListToDrawDataEx(DrawData* draw_data, Vector<DrawList*>* out_list, DrawList* draw_list) => AddDrawListToDrawDataExImpl(draw_data, out_list, draw_list);
         
         [LinkName("igAddSettingsHandler")]
         private static extern void AddSettingsHandlerImpl(SettingsHandler* handler);
@@ -7257,8 +7260,8 @@ namespace ImGui
         public static void DebugNodeWindowSettings(WindowSettings* settings) => DebugNodeWindowSettingsImpl(settings);
         
         [LinkName("igDebugNodeWindowsList")]
-        private static extern void DebugNodeWindowsListImpl(Vector<Window**> windows, char* label);
-        public static void DebugNodeWindowsList(Vector<Window**> windows, char* label) => DebugNodeWindowsListImpl(windows, label);
+        private static extern void DebugNodeWindowsListImpl(Vector<Window*>* windows, char* label);
+        public static void DebugNodeWindowsList(Vector<Window*>* windows, char* label) => DebugNodeWindowsListImpl(windows, label);
         
         [LinkName("igDebugNodeWindowsListByBeginStackParent")]
         private static extern void DebugNodeWindowsListByBeginStackParentImpl(Window** windows, int32 windows_size, Window* parent_in_begin_stack);
@@ -7301,8 +7304,8 @@ namespace ImGui
         public static ID DockBuilderAddNode(ID node_id = (ID) 0, DockNodeFlags flags = (DockNodeFlags) 0) => DockBuilderAddNodeImpl(node_id, flags);
         
         [LinkName("igDockBuilderCopyDockSpace")]
-        private static extern void DockBuilderCopyDockSpaceImpl(ID src_dockspace_id, ID dst_dockspace_id, Vector<char**> in_window_remap_pairs);
-        public static void DockBuilderCopyDockSpace(ID src_dockspace_id, ID dst_dockspace_id, Vector<char**> in_window_remap_pairs) => DockBuilderCopyDockSpaceImpl(src_dockspace_id, dst_dockspace_id, in_window_remap_pairs);
+        private static extern void DockBuilderCopyDockSpaceImpl(ID src_dockspace_id, ID dst_dockspace_id, Vector<char*>* in_window_remap_pairs);
+        public static void DockBuilderCopyDockSpace(ID src_dockspace_id, ID dst_dockspace_id, Vector<char*>* in_window_remap_pairs) => DockBuilderCopyDockSpaceImpl(src_dockspace_id, dst_dockspace_id, in_window_remap_pairs);
         
         [LinkName("igDockBuilderCopyNode")]
         private static extern void DockBuilderCopyNodeImpl(ID src_node_id, ID dst_node_id, Vector<ID*> out_node_remap_pairs);

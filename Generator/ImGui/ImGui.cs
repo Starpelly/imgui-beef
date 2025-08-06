@@ -82,6 +82,11 @@ namespace ImGuiBeefGenerator.ImGui
                 fixedTemplate = fixedTemplate.Substring(0, fixedTemplate.Length - 2);
                 isPointer = true;
             }
+            else if (fixedTemplate.EndsWith("Ptr*")) // @PELLY - Idk, something to do with Vectors holding pointers
+            {
+                fixedTemplate = fixedTemplate[..^1];
+                isPointer = true;
+            }
 
             if (fixedTemplate.Contains("_"))
             {
@@ -95,11 +100,13 @@ namespace ImGuiBeefGenerator.ImGui
                 fixedTemplate = fixedTemplate.Remove(fixedTemplate.Length - 3, 3);
                 fixedTemplate += "*";
             }
+            /*
             else if (fixedTemplate.Trim('*').EndsWith("Ptr"))
             {
                 fixedTemplate = fixedTemplate.Remove(fixedTemplate.Length - 4, 3);
                 fixedTemplate += "*";
             }
+            */
 
             fixedTemplate += ">";
             if (isPointer) fixedTemplate += "*";

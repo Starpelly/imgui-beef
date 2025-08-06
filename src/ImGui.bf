@@ -1,5 +1,5 @@
 // -- GENERATION INFORMATION --
-// Date: 07/15/2025 06:04:29
+// Date: 8/5/2025 8:30:02 PM
 // Constructors: 113
 // Destructors: 90
 // Enums: 85
@@ -134,18 +134,18 @@ namespace ImGui
 
         public typealias BitArrayForNamedKeys = BitArray<const Key.NamedKey_COUNT, const -Key.NamedKey_BEGIN>;
         public typealias BitArrayPtr = U32*;
-        public typealias DrawCallback = function void (DrawList* parent_list,  ImDrawCmd* cmd);
+        public typealias DrawCallback = function void (DrawList* parent_list, DrawCmd* cmd);
         public typealias DrawIdx = ushort;
         public typealias FileHandle = FILE*;
         public typealias FontAtlasRectId = int32;
-        public typealias ContextHookCallback = function void (Context* ctx,  ImGuiContextHook* hook);
-        public typealias ErrorCallback = function void (Context* ctx,  void* user_data,  char* msg);
+        public typealias ContextHookCallback = function void (Context* ctx, ContextHook* hook);
+        public typealias ErrorCallback = function void (Context* ctx, void* user_data, char* msg);
         public typealias ID = uint32;
         public typealias InputTextCallback = function int (InputTextCallbackData* data);
         public typealias KeyChord = int32;
         public typealias KeyRoutingIndex = S16;
-        public typealias MemAllocFunc = function void* (size sz,  void* user_data);
-        public typealias MemFreeFunc = function void (void* ptr,  void* user_data);
+        public typealias MemAllocFunc = function void* (size sz, void* user_data);
+        public typealias MemFreeFunc = function void (void* ptr, void* user_data);
         public typealias SelectionUserData = S64;
         public typealias SizeCallback = function void (SizeCallbackData* data);
         public typealias TableColumnIdx = S16;
@@ -155,7 +155,7 @@ namespace ImGui
         public typealias S32 = int32;
         public typealias S64 = int64;
         public typealias S8 = char;
-        public typealias StbTexteditState = Stb::STB<TexteditState>;
+        public typealias StbTexteditState = void*;
         public typealias TextureID = U64;
         public typealias U16 = ushort;
         public typealias U32 = uint32;
@@ -164,7 +164,7 @@ namespace ImGui
         public typealias Wchar = Wchar16;
         public typealias Wchar16 = ushort;
         public typealias Wchar32 = uint32;
-        public typealias stbrp_node_im = stbrp<node>;
+        public typealias stbrp_node_im = void*;
         
         [AllowDuplicates]
         public enum DrawFlags : int32
@@ -2451,8 +2451,8 @@ namespace ImGui
         [CRepr]
         public struct FontAtlasBuilder
         {
-            public stbrp<context<opaque>> PackContext;
-            public Vector<stbrp<node<im>>> PackNodes;
+            public void* PackContext;
+            public Vector<void*> PackNodes;
             public Vector<TextureRect> Rects;
             public Vector<FontAtlasRectEntry> RectsIndex;
             public Vector<uchar> TempBuffer;
@@ -2466,7 +2466,7 @@ namespace ImGui
             public Vec2i MaxRectBounds;
             public bool LockDisableResize;
             public bool PreloadedAllGlyphsRanges;
-            public StableVector<FontBaked<<32>>> BakedPool;
+            public StableVector<FontBaked> BakedPool;
             public Storage BakedMap;
             public int32 BakedDiscardedCount;
             public FontAtlasRectId PackIdMouseCursors;
@@ -3575,6 +3575,7 @@ namespace ImGui
             {
                 this = *CtorImpl();
             }
+            
             [CRepr, Union]
             public struct InputEventUnion0
             {
@@ -4659,6 +4660,7 @@ namespace ImGui
             {
                 this = *CtorImpl(_key, _val);
             }
+            
             [CRepr, Union]
             public struct StoragePairUnion0
             {
@@ -4779,6 +4781,7 @@ namespace ImGui
             {
                 this = *CtorImpl(idx, v);
             }
+            
             [CRepr, Union]
             public struct StyleModUnion0
             {
@@ -5213,8 +5216,8 @@ namespace ImGui
             public void Append(char* str, char* str_end = null) mut=> AppendImpl(&this, str, str_end);
             
             [LinkName("ImGuiTextBuffer_appendf")]
-            private static extern void AppendfImpl(Self* self,  char* fmt, ...);
-            public void Appendf( char* fmt, params Object[] args) mut=> AppendfImpl(&this, scope String()..AppendF(StringView(fmt), params args));
+            private static extern void AppendfImpl(Self* self, char* fmt, ...);
+            public void Appendf(char* fmt, params Object[] args) mut=> AppendfImpl(&this, scope String()..AppendF(StringView(fmt), params args));
             
             [LinkName("ImGuiTextBuffer_begin")]
             private static extern char* BeginImpl(Self* self);
@@ -6253,8 +6256,8 @@ namespace ImGui
             }
             
             [LinkName("ImVector_ImVector_Vector_T_")]
-            private static extern Vector<T>* CtorImpl(Vector<T > src);
-            public this(Vector<T > src)
+            private static extern Vector<T>* CtorImpl(Vector<T> src);
+            public this(Vector<T> src)
             {
                 this = *CtorImpl(src);
             }

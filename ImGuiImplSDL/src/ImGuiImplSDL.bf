@@ -49,8 +49,8 @@ namespace ImGui
         public static bool ProcessEvent(SDL_Event* event) => ProcessEventImpl(event);
         
         [LinkName("ImGui_ImplSDL2_SetGamepadMode")]
-        private static extern void SetGamepadModeImpl(<plSDL2<GamepadMode>> mode, struct <SDL_GameController**> manual_gamepads_array, int32 manual_gamepads_count);
-        public static void SetGamepadMode(<plSDL2<GamepadMode>> mode, struct <SDL_GameController**> manual_gamepads_array = nullptr, int32 manual_gamepads_count = -1) => SetGamepadModeImpl(mode, manual_gamepads_array, manual_gamepads_count);
+        private static extern void SetGamepadModeImpl(<plSDL2<GamepadMode>> mode, struct<SDL_GameController**> manual_gamepads_array, int32 manual_gamepads_count);
+        public static void SetGamepadMode(<plSDL2<GamepadMode>> mode, struct<SDL_GameController**> manual_gamepads_array = nullptr, int32 manual_gamepads_count = -1) => SetGamepadModeImpl(mode, manual_gamepads_array, manual_gamepads_count);
         
         [LinkName("ImGui_ImplSDL2_Shutdown")]
         private static extern void ShutdownImpl();

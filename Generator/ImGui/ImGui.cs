@@ -29,6 +29,11 @@ namespace ImGuiBeefGenerator.ImGui
 
         public static string FixType(string type)
         {
+            // @PELLY - HACK
+            // Idk what this is, but if we need it, we can look at it later.
+            if (type.StartsWith("stbrp"))
+                return "void*";
+
             if (type.Contains("_") && !IsFunctionPointer(type) && !type.EndsWith("_t") && !type.EndsWith("_t*"))
                 return FixTemplate(type);
 
@@ -65,6 +70,9 @@ namespace ImGuiBeefGenerator.ImGui
 
             if (fixedTemplate == "STB_TexteditState" || fixedTemplate.StartsWith("SDL_"))
                 return fixedTemplate;
+            // @PELLY - HACK
+            if (fixedTemplate == "ImFontBaked__32")
+                return "FontBaked";
 
             fixedTemplate = fixedTemplate.Replace("const_", "");
 
@@ -139,12 +147,16 @@ namespace ImGuiBeefGenerator.ImGui
 
         public static string RemovePrefix(string type)
         {
-            var fixedType = type;
+            // @PELLY
+            // I guess RogueMacro didn't expect these to ever be trailing...
+            // So we'll have to account for that!
+            var trimmedType = type.Trim(' ');
+            var fixedType = trimmedType;
 
             if (fixedType.StartsWith("ImGui"))
-                fixedType = type.Remove(0, 5);
+                fixedType = trimmedType.Remove(0, 5);
             else if (fixedType.StartsWith("Im"))
-                fixedType = type.Remove(0, 2);
+                fixedType = trimmedType.Remove(0, 2);
 
             return fixedType;
         }

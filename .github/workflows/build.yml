@@ -63,7 +63,8 @@ jobs:
   windows:
     runs-on: windows-latest
     needs: [compare-tags]
-    if: needs.compare-tags.outputs.is-new-version == 'true'
+    #if: needs.compare-tags.outputs.is-new-version == 'true'
+    if: always()
     
     steps:
       - uses: actions/checkout@v3

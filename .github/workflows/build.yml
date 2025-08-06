@@ -53,11 +53,11 @@ jobs:
           echo $CT
           echo $IBT
           
-      #- name: Compare tags
-      #  id: compare
-      #  run: |
-          # NOT_EQ=${{ steps.get_latest_tag.outputs.cimgui_tag != steps.get_latest_tag.outputs.imgui_beef_tag }}
-          # echo "::set-output name=not_equal::$NOT_EQ"
+      - name: Compare tags
+        id: compare
+        run: |
+          NOT_EQ=${{ steps.get_latest_tag.outputs.cimgui_tag != steps.get_latest_tag.outputs.imgui_beef_tag }}
+          echo "::set-output name=not_equal::$NOT_EQ"
           # echo "{not_equal}={$NOT_EQ}" >> $GITHUB_OUTPUT
 
   windows:

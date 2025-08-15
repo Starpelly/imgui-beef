@@ -2,20 +2,27 @@ cmake_minimum_required(VERSION 3.18)
 
 project(cimgui)
 
+set(CIMGUI_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../cimgui)
+set(CIMGUI_DEPS_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+
 #general settings
 file(GLOB IMGUI_SOURCES
-    cimgui.cpp
-    imgui/imgui.cpp
-    imgui/imgui_draw.cpp
-    imgui/imgui_demo.cpp
-    imgui/imgui_widgets.cpp
-    imgui/imgui_tables.cpp
-    imgui/backends/imgui_impl_glfw.h
-    imgui/backends/imgui_impl_glfw.cpp
-    imgui/backends/imgui_impl_opengl3.h
-    imgui/backends/imgui_impl_opengl3.cpp
-    imgui/backends/imgui_impl_sdl2.h
-    imgui/backends/imgui_impl_sdl2.cpp
+    ${CIMGUI_DIR}/cimgui.cpp
+    ${CIMGUI_DIR}/imgui/imgui.cpp
+    ${CIMGUI_DIR}/imgui/imgui_draw.cpp
+    ${CIMGUI_DIR}/imgui/imgui_demo.cpp
+    ${CIMGUI_DIR}/imgui/imgui_widgets.cpp
+    ${CIMGUI_DIR}/imgui/imgui_tables.cpp
+    ${CIMGUI_DIR}/imgui/backends/imgui_impl_glfw.h
+    ${CIMGUI_DIR}/imgui/backends/imgui_impl_glfw.cpp
+    ${CIMGUI_DIR}/imgui/backends/imgui_impl_opengl3.h
+    ${CIMGUI_DIR}/imgui/backends/imgui_impl_opengl3.cpp
+    ${CIMGUI_DIR}/imgui/backends/imgui_impl_sdl2.h
+    ${CIMGUI_DIR}/imgui/backends/imgui_impl_sdl2.cpp
+    ${CIMGUI_DIR}/imgui/backends/imgui_impl_sdl3.h
+    ${CIMGUI_DIR}/imgui/backends/imgui_impl_sdl3.cpp
+    ${CIMGUI_DIR}/imgui/backends/imgui_impl_sdlgpu3.h
+    ${CIMGUI_DIR}/imgui/backends/imgui_impl_sdlgpu3.cpp
     glad/glad.h
     glad/glad.c
 )
@@ -47,9 +54,13 @@ else (WIN32)
     target_compile_definitions(cimgui PUBLIC IMGUI_IMPL_API=extern\t\"C\"\t)
 endif (WIN32)
 
-target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/imgui)
-target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/SDL2/include)
+target_include_directories(cimgui PUBLIC ${CIMGUI_DIR})
+target_include_directories(cimgui PUBLIC ${CIMGUI_DIR}/imgui)
+
+target_include_directories(cimgui PUBLIC ${CIMGUI_DEPS_DIR})
+target_include_directories(cimgui PUBLIC ${CIMGUI_DEPS_DIR}/SDL2/include)
+target_include_directories(cimgui PUBLIC ${CIMGUI_DEPS_DIR}/SDL3/include)
+
 set_target_properties(cimgui PROPERTIES PREFIX "")
 target_link_libraries(cimgui ${IMGUI_LIBRARIES})
 
